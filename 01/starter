@@ -2,3 +2,5 @@
 2. import data-jpa, starter-web, devtools, h2, mysql
 3. create package "domain" for model
 4. create java class "Project"
+5. create package "repositories"
+4. create interface "ProjectRepository"
