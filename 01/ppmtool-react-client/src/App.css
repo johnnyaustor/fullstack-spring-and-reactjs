@@ -63,3 +63,11 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+input[aria-hidden="true"] {
+  visibility: hidden;
+}
+input[aria-hidden="false"] {
+  visibility: visible;
+  background: cornsilk;
+}
