@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-import { getProjectTask } from "../../../actions/backlogActions";
+import { getProjectTask, updateProjectTask } from "../../../actions/backlogActions";
 import PropTypes from "prop-types";
 
 class UpdateProjectTask extends Component {
     constructor(props) {
         super(props);
-
-        const { id } = this.props.match.params;
 
         this.state = {
             id: "",
@@ -46,12 +44,7 @@ class UpdateProjectTask extends Component {
             created_At: this.state.created_At
         }
 
-        console.log(newProjectTask);
-
-
-        // this.props.addProjectTask(this.state.projectIdentifier, newProjectTask, this.props.history);
-
-
+        this.props.updateProjectTask(this.state.projectIdentifier, this.state.projectSequence, newProjectTask, this.props.history);
     }
 
     componentDidMount() {
@@ -90,7 +83,6 @@ class UpdateProjectTask extends Component {
     }
 
     render() {
-        const { id } = this.props.match.params;
         const { errors } = this.state;
 
         return (
@@ -98,7 +90,7 @@ class UpdateProjectTask extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <Link to={`/projectBoard/${id}`} className="btn btn-light">
+                            <Link to={`/projectBoard/${this.state.projectIdentifier}`} className="btn btn-light">
                                 Back to Project Board
                             </Link>
                             <h4 className="display-4 text-center">Update Project Task</h4>
@@ -186,15 +178,19 @@ class UpdateProjectTask extends Component {
 
 UpdateProjectTask.propTypes = {
     getProjectTask: PropTypes.func.isRequired,
-    project_task: PropTypes.object.isRequired
+    project_task: PropTypes.object.isRequired,
+    updateProjectTask: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    project_task: state.backlog.project_task
+    project_task: state.backlog.project_task,
+    errors: state.errors
 })
 
 const mapDispatchToProps = {
-    getProjectTask
+    getProjectTask,
+    updateProjectTask
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateProjectTask)
