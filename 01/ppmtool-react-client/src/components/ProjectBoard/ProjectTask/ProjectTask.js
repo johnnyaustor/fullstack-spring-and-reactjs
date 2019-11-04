@@ -5,9 +5,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class ProjectTask extends Component {
-    constructor() {
-        super();
-    }
 
     onDeleteClick(backlog_id, pt_id) {
         this.props.deleteProjectTask(backlog_id, pt_id);
